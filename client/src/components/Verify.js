@@ -34,7 +34,7 @@ function Verify() {
         if (otpCode.length === 8) {
             try {
                 // Replace with your actual verification API endpoint
-                const response = await axios.post('http://localhost:80/api/auth/verify-otp', { email, otp: otpCode });
+                const response = await axios.post('https://registration-page-server.vercel.app/api/auth/verify-otp', { email, otp: otpCode });
                 alert(response.data.message || 'OTP verified successfully');
                 navigate('/login'); 
             } catch (err) {

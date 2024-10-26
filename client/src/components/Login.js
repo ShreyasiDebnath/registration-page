@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
         console.log(email,password)
         try {
-            const response = await axios.post('http://localhost:80/api/auth/login', {
+            const response = await axios.post('https://registration-page-server.vercel.app/api/auth/login', {
                 email,
                 password,
             });

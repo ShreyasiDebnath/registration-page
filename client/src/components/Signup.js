@@ -15,7 +15,7 @@ const Signup = () => {
         e.preventDefault();
         
         try {
-            const response = await axios.post('http://localhost:80/api/auth/signup', {
+            const response = await axios.post('https://registration-page-server.vercel.app/api/auth/signup', {
                 name: username,
                 email,
                 password,
