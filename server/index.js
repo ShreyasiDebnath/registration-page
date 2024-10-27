@@ -4,7 +4,7 @@ const cors = require('cors');
 const connectToMongo = require('./db');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/userRoutes');
-
+const User = require('../models/UserSchema'); 
 connectToMongo();
 
 const app = express();
@@ -29,7 +29,16 @@ app.get('/', (req, res) => {
 
 // Available routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+router.get('/usernames', async (req, res) => {
+  try {
+    const users = await User.find({}, 'name'); // Retrieve only the 'name' field
+    const usernames = users.map(user => user.name); // Map to get only the names
+    res.json(usernames);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 // Export the app for Vercel
 module.exports = app;
