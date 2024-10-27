@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 
 // Allow requests from http://localhost:3000
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://registration-page-client.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust methods as needed
     credentials: true, // Enable this if cookies or auth headers are sent
 };
