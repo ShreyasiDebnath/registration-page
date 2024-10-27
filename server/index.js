@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 
 // Available routes
 app.use('/api/auth', authRoutes);
+const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
 // Export the app for Vercel
