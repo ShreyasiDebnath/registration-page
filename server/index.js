@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
 // Available routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-
+app.listen(port, () => {
+  console.log(`Server is running on port http://localhost:${port}`);
+});
 // Export the app for Vercel
 module.exports = app;
