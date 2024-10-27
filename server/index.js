@@ -19,7 +19,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions)); // Use CORS with the specified options
 app.use(express.json());
-
+app.listen(port, () => {
+  console.log(`Server is running on port http://localhost:${port}`);
+});
 // Root route (optional)
 app.get('/', (req, res) => {
     res.send('Welcome to the API!');
@@ -28,8 +30,6 @@ app.get('/', (req, res) => {
 // Available routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`);
-});
+
 // Export the app for Vercel
 module.exports = app;
