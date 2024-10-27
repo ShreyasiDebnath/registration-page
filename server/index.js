@@ -1,23 +1,25 @@
-require('dotenv').config();
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
-const connectToMongo = require('./db');
+const connectDB = require('./db');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/userRoutes');
 
-connectToMongo();
+connectDB();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Configure CORS
+
+// Allow requests from http://localhost:3000
 const corsOptions = {
-    origin: 'https://registration-page-client.vercel.app', // Allow only your client origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods if needed
-    credentials: true, // Allow credentials (if necessary)
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust methods as needed
+    credentials: true, // Enable this if cookies or auth headers are sent
 };
 
-app.use(cors(corsOptions)); // Use CORS with the specified options
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);

@@ -1,7 +1,7 @@
 // SignUp.js
 import React, { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
-import axios from 'axios';
+import axios from '../axios';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
         console.log(email,password)
         try {
-            const response = await axios.post('https://registration-page-server.vercel.app/api/auth/login', {
+            const response = await axios.post('/auth/login', {
                 email,
                 password,
             });

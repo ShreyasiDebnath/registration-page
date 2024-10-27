@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 function Verify() {
     const location = useLocation();
     const email = location.state?.email;
@@ -34,7 +34,7 @@ function Verify() {
         if (otpCode.length === 8) {
             try {
                 // Replace with your actual verification API endpoint
-                const response = await axios.post('https://registration-page-server.vercel.app/api/auth/verify-otp', { email, otp: otpCode });
+                const response = await axios.post('auth/verify-otp', { email, otp: otpCode });
                 alert(response.data.message || 'OTP verified successfully');
                 navigate('/login'); 
             } catch (err) {
