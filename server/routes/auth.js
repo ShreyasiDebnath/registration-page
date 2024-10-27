@@ -105,18 +105,30 @@ router.post('/login', async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user || !user.isVerified) return res.status(400).send('Invalid credentials or account not verified.');
+    if (!user || !user.isVerified) {
+      return res.status(400).json({ message: 'Invalid credentials or account not verified.' });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).send('Invalid credentials.');
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials.' });
+    }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    console.log(token)
-    res.json({ token });
+    console.log(token);
+
+    // Set the token in a HttpOnly cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'Lax', // or 'Strict' if you need more strict handling
+      secure: process.env.NODE_ENV === 'production', // Use 'true' in production for HTTPS
+      maxAge: 3600000, // 1 hour in milliseconds
+    });
+
+    res.json({ message: 'Login successful' });
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Server error' });
   }
 });
-
 module.exports = router;
