@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 // Available routes
 app.use('/api/auth', authRoutes);
-router.get('/usernames', async (req, res) => {
+app.get('/usernames', async (req, res) => {
   try {
     const users = await User.find({}, 'name'); // Retrieve only the 'name' field
     const usernames = users.map(user => user.name); // Map to get only the names
