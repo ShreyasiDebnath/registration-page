@@ -86,7 +86,7 @@ router.post('/resend-otp', async (req, res) => {
 
     // Resend OTP email
     await resend.emails.send({
-      from: 'no-reply@yourdomain.com',
+      from: 'no-reply@shreyasi.com',
       to: email,
       subject: 'Resend OTP for Account Verification',
       text: `Your new OTP is ${otp}`,
