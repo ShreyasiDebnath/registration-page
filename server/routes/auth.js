@@ -11,6 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Sign Up
 router.post('/signup', async (req, res) => {
+  console.log("Starting signup process...");
   const { name, email, password } = req.body;
 
   try {
